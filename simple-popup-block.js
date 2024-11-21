@@ -7,7 +7,7 @@
 // @description  Block GET requests to specific URLs, domains, and filenames.
 // @author       me
 // @match       *://*/*
-// @grant        GM.webRequest
+// @grant        GM_webRequest
 // ==/UserScript==
 
 (function () {
