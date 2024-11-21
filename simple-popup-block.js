@@ -1,59 +1,50 @@
 // ==UserScript==
 // @name         Simple Popup Blocker
 // @namespace    http://interlacedpixel.com/
-// @updateURL    https://github.com/Jayian1890/userscripts/raw/main/simple-popup-block.js
-// @downloadURL  https://github.com/Jayian1890/userscripts/raw/main/simple-popup-block.js
-// @version      0.3
-// @description  Block GET requests to specific URLs, domains, and filenames.
-// @author       me
+// @updateURL    https://github.com/Jayian1890/userscripts/raw/main/simple-popup-block.js // Update this to your actual raw URL
+// @downloadURL  https://github.com/Jayian1890/userscripts/raw/main/simple-popup-block.js // Update this too
+// @version      0.6
+// @description  Block requests to specific URLs, domains, and filenames.
+// @author       You
 // @match       *://*/*
-// @grant        GM_webRequest
+// @grant        GM.webRequest
+// @grant        GM.notification
 // ==/UserScript==
 
 (function () {
   "use strict";
 
   const blockedPatterns = [
-    //"https://phouckusogh.net/tag.min.js",
-    //"https://*.example.com/*",
-    //"https://another-site.net/*",
-    //"https://yet-another-site.org/specific-path/*",
-    //"http://*.bad-domain.com/annoying-popup.js",
-    //"*://*/*.annoying.js", // Blocks any URL ending with /annoying.js
-    "*://*/tag.min.js", // Blocks bad-script.js on any domain
-    //"*example-file.gif", // Blocks any URL containing example-file.gif (less common, but can be useful)
+    "https://phouckusogh.net/tag.min.js",
+    "*://*/tag.min.js",
   ];
 
   const requestConfig = blockedPatterns.map((pattern) => {
-    // Use a regular expression for filename matching:
     if (pattern.includes("*") && !pattern.startsWith("http")) {
-      // Filename matching logic
-
-      const regexPattern = pattern.replace(/\*/g, ".*"); // Replace * with .* for regex
+      // Filename matching
+      const regexPattern = pattern.replace(/\*/g, ".*");
       const regex = new RegExp(regexPattern);
-
       return {
-        url: regex, // Use 'url' instead of 'selector' with regexes
+        url: regex,
         action: "cancel",
-        types: ["main_frame", "sub_frame"], // Include sub_frames for popups in iframes. Adjust as needed
+        types: ["main_frame", "sub_frame"], // Block in main frames and iframes
       };
     } else {
-      // Standard URL/domain matching
-
+      // URL/domain matching
       return {
-        selector: pattern,
+        selector: pattern, // Use 'selector' for standard URL patterns
         action: "cancel",
-        types: ["main_frame", "sub_frame"], // Important: Block in sub-frames as well for complete protection.
+        types: ["main_frame", "sub_frame"],
       };
     }
   });
 
-  GM_webRequest(requestConfig, (info, message, details) => {
-    console.log("Request blocked:", info.url, info.type);
+  GM.webRequest(requestConfig, (details) => {
+    console.log("Request blocked:", details.url, details.type);
 
-    if (info.url) {
-      GM_notification({
-        text: `Blocked request to: ${info.url}`,
+    if (details.url) {
+      GM.notification({
+        text: `Blocked request to: ${details.url}`,
         title: "Request Blocked",
         timeout: 3000,
       });
