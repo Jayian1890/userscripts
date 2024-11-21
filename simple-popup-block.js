@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Simple Popup Blocker
 // @namespace    http://interlacedpixel.com/
-// @version      0.1
+// @version      0.2
 // @description  Block GET requests to specific URLs, domains, and filenames.
 // @author       me
 // @match       *://*/*
