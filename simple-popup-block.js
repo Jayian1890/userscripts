@@ -3,7 +3,7 @@
 // @namespace    http://interlacedpixel.com/
 // @updateURL    https://github.com/Jayian1890/userscripts/raw/main/simple-popup-block.js
 // @downloadURL  https://github.com/Jayian1890/userscripts/raw/main/simple-popup-block.js
-// @version      0.1
+// @version      0.2
 // @description  Block GET requests to specific URLs, domains, and filenames.
 // @author       me
 // @match       *://*/*
@@ -14,13 +14,13 @@
   "use strict";
 
   const blockedPatterns = [
-    "https://phouckusogh.net/tag.min.js",
+    //"https://phouckusogh.net/tag.min.js",
     //"https://*.example.com/*",
     //"https://another-site.net/*",
     //"https://yet-another-site.org/specific-path/*",
     //"http://*.bad-domain.com/annoying-popup.js",
     //"*://*/*.annoying.js", // Blocks any URL ending with /annoying.js
-    //"*://*/tag.min.js", // Blocks bad-script.js on any domain
+    "*://*/tag.min.js", // Blocks bad-script.js on any domain
     //"*example-file.gif", // Blocks any URL containing example-file.gif (less common, but can be useful)
   ];
 
