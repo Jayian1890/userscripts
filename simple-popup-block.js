@@ -12,14 +12,14 @@
   "use strict";
 
   const blockedPatterns = [
-    //"https://phouckusogh.net/tag.min.js",
+    "https://phouckusogh.net/tag.min.js",
     //"https://*.example.com/*",
     //"https://another-site.net/*",
     //"https://yet-another-site.org/specific-path/*",
     //"http://*.bad-domain.com/annoying-popup.js",
     //"*://*/*.annoying.js", // Blocks any URL ending with /annoying.js
-    "*://*/tag.min.js", // Blocks bad-script.js on any domain
-    //"*example-file.gif", // Blocks any URL containing example-file.gif (less common, but can be useful)
+    //"*://*/tag.min.js", // Blocks bad-script.js on any domain
+    //"*tag.min.js", // Blocks any URL containing example-file.gif (less common, but can be useful)
   ];
 
   const requestConfig = blockedPatterns.map((pattern) => {
