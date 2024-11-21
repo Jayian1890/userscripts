@@ -3,7 +3,7 @@
 // @namespace    http://interlacedpixel.com/
 // @updateURL    https://github.com/Jayian1890/userscripts/raw/main/simple-popup-block.js
 // @downloadURL  https://github.com/Jayian1890/userscripts/raw/main/simple-popup-block.js
-// @version      0.2
+// @version      0.3
 // @description  Block GET requests to specific URLs, domains, and filenames.
 // @author       me
 // @match       *://*/*
